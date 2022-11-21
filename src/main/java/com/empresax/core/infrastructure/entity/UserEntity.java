@@ -1,7 +1,8 @@
 package com.empresax.core.infrastructure.entity;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +33,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class UserEntity {
+public class UserEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,11 +61,7 @@ public class UserEntity {
     private String phone_number;
 
     @OneToMany
-    @JoinTable(
-        name = "user_address", 
-        joinColumns = @JoinColumn(name = "fk_user"), 
-        inverseJoinColumns = @JoinColumn(name = "fk_address")
-    )
+    @JoinTable(name = "user_address", joinColumns = @JoinColumn(name = "fk_user"), inverseJoinColumns = @JoinColumn(name = "fk_address"))
     private List<AddressEntity> addresses = Collections.emptyList();
 
     @Convert(converter = RoleConverter.class)
@@ -72,7 +71,7 @@ public class UserEntity {
     private StateType state = StateType.ACTIVE;
 
     @Column(name = "date_entry")
-    private Date date_entry = new Date(System.currentTimeMillis());
+    private Timestamp date_entry;
 
 }
 

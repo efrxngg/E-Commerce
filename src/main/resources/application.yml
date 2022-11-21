@@ -5,7 +5,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL92Dialect
-    show-sql: true
+    show-sql: false
 
 # file releated all configuration
   servlet:

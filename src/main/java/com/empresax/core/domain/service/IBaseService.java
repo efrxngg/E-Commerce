@@ -10,7 +10,7 @@ public interface IBaseService<T, ID> {
 
     List<T> findAll();
 
-    T updateById(T entity);
+    T updateById(T entity, ID id);
 
     void deleteById(ID id);
 

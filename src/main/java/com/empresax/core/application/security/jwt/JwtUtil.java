@@ -9,8 +9,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.empresax.core.domain.service.impl.UserDetailsImpl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -22,12 +23,12 @@ public class JwtUtil {
 
     public static final String SECRET_KEY = "Dev@efrxngg|E-COMMERCE|S3CR3TKEYW1THSPRINGS3CUR1TY4NDJWTDWEXFYH2J3K5N6P7R9SATCVDWEYGZH2K4M5N7Q8R9TBUCVDXFYGZJ3K4M6q4t7w!z$C&F)J@NcRfUjXn2r5u8x/A?D*G-KaPdSgVkYp3s6v9y$B&E)H+MbQeThWmZq4t7w!z%C*F-JaNcRfUjXn2r5u8x/A?";
 
-    public String create(UserDetails principal) {
+    public String create(UserDetailsImpl principal) {
         Map<String, Object> payload = new HashMap<>();
-        payload.put(ROLE_CLAIM, principal.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList()));
+        payload.put(ROLE_CLAIM,
+                principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
         payload.put("sub", principal.getUsername());
+        payload.put("id", principal.getId());
         var ms = System.currentTimeMillis();
         return Jwts.builder()
                 .setClaims(payload)

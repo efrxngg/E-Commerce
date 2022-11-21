@@ -1,7 +1,6 @@
 package com.empresax.core.domain.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -20,8 +19,6 @@ import lombok.NoArgsConstructor;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    private UUID id_user;
 
     @NotNull(message = "The username cannot be null")
     @NotBlank(message = "The username cannot be empty")

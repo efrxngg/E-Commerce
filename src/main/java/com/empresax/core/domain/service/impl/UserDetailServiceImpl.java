@@ -20,7 +20,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         /*
          * if it throws the exception UsernameNotFoundException if performs a search again
          */
-        return new UserDetailsImpl(userEntityCrudRepository.findByUsername(username).get());
+        return new UserDetailsImpl(userEntityCrudRepository.findByUsernameOrEmail(username).get());
     }
 
 }

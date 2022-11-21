@@ -1,6 +1,6 @@
 package com.empresax.core.infrastructure.dao;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,30 +25,30 @@ public class UserRepositoryImpl implements IUserRepository {
 
     @Override
     public User save(User entity) {
-        UserEntity userEntity = Mapper.toUserEntity(entity);
-        userEntity.setDate_entry(new Date(System.currentTimeMillis()));
+        UserEntity userEntity = Mapper.to(entity, null);
+        userEntity.setDate_entry(new Timestamp(System.currentTimeMillis()));
         userEntity.setRole(RoleType.USER);
         userEntity.setState(StateType.ACTIVE);
-        entity.setId_user(userEnitityCrudRepository.save(userEntity).getId_user());
+        userEnitityCrudRepository.save(userEntity);
         return entity;
     }
 
     @Override
     public Optional<User> findById(UUID id) {
-        return Optional.of(Mapper.toUser(userEnitityCrudRepository.findById(id).get()));
+        return Optional.of(Mapper.to(userEnitityCrudRepository.findById(id).get()));
     }
 
     @Override
     public List<User> findAll() {
         return userEnitityCrudRepository.findAll().stream()
-                .map(Mapper::toUser)
+                .map(Mapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public User update(User entity) {
-        userEnitityCrudRepository.sp_UpdateUser(
-                entity.getId_user(),
+    public User update(User entity, UUID id) {
+        userEnitityCrudRepository.updateUser(
+                id,
                 entity.getUsername(),
                 entity.getPassword(),
                 entity.getFist_name(),
@@ -61,12 +61,33 @@ public class UserRepositoryImpl implements IUserRepository {
     @Override
     public void delete(UUID id) {
         if (userEnitityCrudRepository.existsById(id))
-            userEnitityCrudRepository.sp_deletionlogical(id);
+            userEnitityCrudRepository.deletionLogical(id);
     }
 
     @Override
     public Optional<UserEntity> findByUsername(String username) {
-        return Optional.of(userEnitityCrudRepository.findByUsername(username).get());
+        return userEnitityCrudRepository.findByUsername(username);
+    }
+
+    @Override
+    public boolean existsById(UUID id) {
+        return userEnitityCrudRepository.existsById(id);
+    }
+
+    @Override
+    public Optional<User> findByUsernameOrEmail(String option) {
+        var user = userEnitityCrudRepository.findByUsernameOrEmail(option);
+        if (user.isEmpty())
+            return Optional.empty();
+
+        return Optional.of(Mapper.to(user.get()));
+    }
+
+    @Override
+    public List<User> findByUsernameOrEmail(String username, String email) {
+        var result = userEnitityCrudRepository.findByUsernameOrEmail(username, email);
+
+        return result.stream().map(Mapper::to).collect(Collectors.toList());
     }
 
 }

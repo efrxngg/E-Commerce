@@ -35,3 +35,17 @@ $BODY$;
 call sp_updateuser('ed78a0f9-eeaf-490e-9106-2d93ce1aff94', 'a', 'b', 'c', 'd', 'e', 'd');
 select * from user_x ux ;
 
+ -- UPDATE QUANTITY CART ITEM
+drop procedure if exists updateQuantityCartItem;
+create procedure updateQuantityCartItem(in quant int, in id_i uuid, in id_c uuid)
+language sql as
+$BODY$
+	update item as i set quantity = quant  from cart_item  ci 
+	where i.id_item = id_i 
+	and ci.fk_cart = id_c;
+$BODY$;
+
+call updateQuantityCartItem(1, '761f2f80-5bc3-4e07-a953-b9498492e21c', '75f137cc-0846-42af-80bc-de06519e8b26');
+
+
+

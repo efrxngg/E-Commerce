@@ -1,6 +1,6 @@
 package com.empresax.core.domain.api;
 
-import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,21 +13,21 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "User", description = "Actions available to users")
+@Tag(name = "User", description = "End Points Avalible to User")
 public interface UserApi {
 
-    @Operation(summary = "Create a new User")
+    @Operation(summary = "Create a new User", description = "")
     @PostMapping(value = "/add")
     ResponseEntity<User> createUser(User User);
 
     @Operation(summary = "Update User by Id")
     @SecurityRequirement(name = "Bearer Authentication")
     @PutMapping
-    ResponseEntity<User> updateUserById(User User);
+    ResponseEntity<User> updateUserById(User User, HttpServletRequest request);
 
     @Operation(summary = "Delete User by Id")
     @SecurityRequirement(name = "Bearer Authentication")
-    @DeleteMapping(value = "/{id}")
-    ResponseEntity<Void> deleteUserById(UUID id);
+    @DeleteMapping
+    ResponseEntity<Void> deleteUserById(HttpServletRequest request);
 
 }

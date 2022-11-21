@@ -9,7 +9,7 @@ public interface IBaseRepository<T, ID> {
 
     Optional<T> findById(ID id);
 
-    T update(T entity);
+    T update(T entity, ID id);
 
     List<T> findAll();
 

@@ -16,7 +16,7 @@ public class OpenApiDoc {
     public OpenAPI infoOpenApi() {
         return new OpenAPI()
                 .info(new Info().title("Ecommerce API RESTful")
-                        .description("This project was developed for learning porpouses, if you found any problem and you want to notify me or want to contact me yo can do it through my Linkedln Done by: @efrxngg")
+                        .description("This project was developed for learning porpouses, if you found any problem and you want to notify me or want to contact me yo can do it through my Linkedln")
                         .version("v1")
                         .license(
                                 new License().name("Apache 2.0").url("http://www.apache.org/licenses/LICENSE-2.0.html"))
