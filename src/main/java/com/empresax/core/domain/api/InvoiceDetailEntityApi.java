@@ -23,11 +23,11 @@ public interface InvoiceDetailEntityApi {
     @PostMapping
     ResponseEntity<InvoiceDetailEntity> saveInvoiceDetailEntity(InvoiceDetailEntity entity);
 
-    @Operation(summary = "Find all Invoices Header")
+    @Operation(summary = "Find all Invoices Detail")
     @GetMapping(value = "/all")
     ResponseEntity<List<InvoiceDetailEntity>> findAllInvoiceDetailEntity();
 
-    @Operation(summary = "Find by Id Invoice Header")
+    @Operation(summary = "Find by Id Invoice Detail")
     @GetMapping(value = "/{id}")
     ResponseEntity<InvoiceDetailEntity> findInvoiceDetailEntityById(UUID id);
 

@@ -14,8 +14,6 @@ public class ItemUpdate implements Serializable {
 
     private UUID id_item;
 
-    private UUID id_cart;
-
     private Integer quantity;
 
 }

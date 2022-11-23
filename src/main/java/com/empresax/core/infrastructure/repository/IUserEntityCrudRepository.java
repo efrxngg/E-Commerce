@@ -17,15 +17,15 @@ public interface IUserEntityCrudRepository extends JpaRepository<UserEntity, UUI
 
     @Modifying
     @Query(value = """
-        update user_x set
-		    username = :use,
-		    password = :pas,
-		    first_name = :fir,
-		    last_name = :las,
-		    email = :ema,
-		    phone_number = :pho
-	    where id_user = :id ;
-    """, nativeQuery = true)
+                update user_x set
+              username = :use,
+              password = :pas,
+              first_name = :fir,
+              last_name = :las,
+              email = :ema,
+              phone_number = :pho
+             where id_user = :id ;
+            """, nativeQuery = true)
     void updateUser(
             @Param("id") UUID id,
             @Param("use") String username,
@@ -47,5 +47,8 @@ public interface IUserEntityCrudRepository extends JpaRepository<UserEntity, UUI
 
     @Query(value = "select * from user_x where username = :username or email = :email", nativeQuery = true)
     List<UserEntity> findByUsernameOrEmail(@Param("username") String username, @Param("email") String email);
+
+    @Query(value = "SELECT concat(u.first_name, ' ', u.last_name)  FROM USER_X u where u.id_user = :id", nativeQuery = true)
+    String findNameById(@Param("id") UUID id);
 
 }

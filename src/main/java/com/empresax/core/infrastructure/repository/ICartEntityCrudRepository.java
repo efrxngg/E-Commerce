@@ -15,9 +15,6 @@ public interface ICartEntityCrudRepository extends JpaRepository<CartEntity, UUI
     @Query(value = "select * from cart where fk_user = :id", nativeQuery = true)
     Optional<CartEntity> findByUserId(@Param("id") UUID id);
 
-    @Query(value = "select * from cart where fk_user = :id", nativeQuery = true)
-    Optional<CartEntity> findIdByUserId(@Param("id") UUID id);
-
     @Modifying
     @Query(value = """
                 delete from cart_item ci where ci.fk_cart in (select ci.fk_cart from cart_item ci inner join cart c on ci.fk_cart = c.id_cart
@@ -26,10 +23,19 @@ public interface ICartEntityCrudRepository extends JpaRepository<CartEntity, UUI
     void deleteFromCartItemByUserId(@Param("id") UUID id);
 
     @Modifying
-    @Query(value = "update item as i set quantity = :quant  from cart_item  ci where i.id_item = :id_i and ci.fk_cart = :id_c", nativeQuery = true)
+    @Query(value = "update item as i set quantity = :quant  from cart_item  ci where i.id_item = ci.fk_item  and i.id_item = :id_i", nativeQuery = true)
     void updateQuantityCartItem(
             @Param("quant") Integer quant,
-            @Param("id_i") UUID id_item,
-            @Param("id_c") UUID id_cart);
+            @Param("id_i") UUID id_item
+            );
+
+    @Modifying
+    @Query(value = """
+                delete from item i where i.id_item in (SELECT ci.fk_item  FROM cart_item ci
+                INNER JOIN cart c ON ci.fk_cart=c.id_cart
+                inner join user_x ux on c.fk_user = ux.id_user
+                where ux.id_user = :id)
+            """, nativeQuery = true)
+    void deleteFromItemByUserId(@Param("id") UUID id);
 
 }

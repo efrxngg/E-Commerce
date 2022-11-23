@@ -40,7 +40,7 @@ public class CartServiceImpl implements ICartService {
     @Override
     @Transactional
     public CartCreate saveOrUpdateCart(CartCreate cart) {
-        var cartDB = cartEntityCrudRepository.findIdByUserId(cart.getId_user());
+        var cartDB = cartEntityCrudRepository.findByUserId(cart.getId_user());
         if (cartDB.isPresent())
             return updateCart(cart, cartDB);
 
@@ -143,7 +143,7 @@ public class CartServiceImpl implements ICartService {
     @Transactional
     public ItemUpdate updateQuantityByItemId(ItemUpdate item) {
         try {
-            cartEntityCrudRepository.updateQuantityCartItem(item.getQuantity(), item.getId_item(), item.getId_cart());
+            cartEntityCrudRepository.updateQuantityCartItem(item.getQuantity(), item.getId_item());
         } catch (Exception e) {
             throw new ItemException("The item or cart id is incorrect");
         }
@@ -159,7 +159,7 @@ public class CartServiceImpl implements ICartService {
     @Transactional
     public void cleanCartByUserId(UUID id) {
         try {
-            cartEntityCrudRepository.deleteFromCartItemByUserId(id);
+            cartEntityCrudRepository.deleteFromItemByUserId(id);
         } catch (Exception e) {
             throw new ItemException("The item or cart id is incorrect");
         }

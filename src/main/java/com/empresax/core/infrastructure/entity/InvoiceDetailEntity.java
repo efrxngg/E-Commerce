@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,8 +35,8 @@ public class InvoiceDetailEntity implements Serializable {
     @Column(name = "fk_invoice")
     private UUID fk_invoice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_item", referencedColumnName = "id_item", insertable = false, updatable = false, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "fk_item")
     private ItemEntity fk_item;
 
     @Enumerated(EnumType.ORDINAL)
