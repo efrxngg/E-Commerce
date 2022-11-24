@@ -25,7 +25,7 @@ public class TokenEntity {
     @Column(name = "id_token")
     private UUID id_token;
 
-    @Column(name = "value")
+    @Column(name = "value", length = 300)
     private String value;
 
 }

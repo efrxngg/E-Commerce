@@ -18,9 +18,9 @@ public class PostgreSQLConfig {
     public DataSource getPostgreDataSource() {
         DriverManagerDataSource source = new DriverManagerDataSource();
         source.setDriverClassName("org.postgresql.Driver");
-        source.setUrl("jdbc:postgresql://127.0.0.1:5432/empresax");
-        source.setUsername("postgres");
-        source.setPassword("root1234");
+        source.setUrl("jdbc:postgresql://ec2-3-219-52-220.compute-1.amazonaws.com:5432/d5vp9789a36i52");
+        source.setUsername("nermokbyiqlwza");
+        source.setPassword("3930e7e3920260bac34dfba648d900b2250dfd17024142be93a1ee2db903ccbe");
         return source;
     }
 

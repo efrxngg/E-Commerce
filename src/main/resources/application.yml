@@ -1,7 +1,7 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL92Dialect
@@ -13,6 +13,5 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
-# project:
-#   image:
-#     product: image/
+project:
+  media: media/
