@@ -17,10 +17,10 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Media", description = "Only For Admins | Option enabled for testing")
-@SecurityRequirement(name = "Bearer Authentication")
 public interface FileApi {
-
+    
     @Operation(summary = "Upload your images to the server")
+    @SecurityRequirement(name = "Bearer Authentication")
     @PostMapping(value = "/imgs", consumes = { "multipart/form-data" })
     ResponseEntity<FileResponse> fileUploadImg(@RequestParam MultipartFile image);
 
