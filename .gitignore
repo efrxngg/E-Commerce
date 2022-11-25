@@ -31,6 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
-media/
 src/main/resources/db/.dbeaver
 src/main/resources/db/.project

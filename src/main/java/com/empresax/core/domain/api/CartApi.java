@@ -20,19 +20,19 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @SecurityRequirement(name = "Bearer Authentication")
 public interface CartApi {
 
-    @Operation(summary = "Save Or Update Cart", description = "A user can only have to one cart")
+    @Operation(summary = "Save Or Update Cart", description = "A user can only have to one cart, no need to pass the user id or the cart id")
     @PostMapping
     ResponseEntity<CartCreate> createCart(CartCreate entity, HttpServletRequest request);
 
-    @Operation(summary = "Get Cart", description = "A user can only have to one cart")
+    @Operation(summary = "Get Cart")
     @GetMapping
     ResponseEntity<Cart> getCart(HttpServletRequest request);
     
-    @Operation(summary = "Change Item Quantity", description = "A user can only have to one cart")
+    @Operation(summary = "Change Item Quantity")
     @PutMapping
     ResponseEntity<ItemUpdate> updateItemCart(ItemUpdate item);
 
-    @Operation(summary = "Clean Items From Cart", description = "A user can only have to one cart")
+    @Operation(summary = "Clean Items From Cart")
     @DeleteMapping 
     ResponseEntity<?> cleanCart(HttpServletRequest request);
 }

@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/user/add").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/admin/media/imgs/**").permitAll()
                 .antMatchers("/api/v1/admin/users/**",
                         "/api/v1/admin/products/**",
                         "/api/v1/admin/tags/**",

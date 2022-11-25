@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import java.util.Set;
 import java.util.UUID;
 
+import com.empresax.core.infrastructure.entity.StateType;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,5 +31,6 @@ public class Invoice implements Serializable {
     // Datos de la cab factura
     private BigDecimal sub_total;
     private BigDecimal total;
+    private StateType state;
     
 }

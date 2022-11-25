@@ -93,7 +93,8 @@ public class Mapper {
                 e.getDate_creation(),
                 new HashSet<>(),
                 e.getSub_total(),
-                e.getTotal()
+                e.getTotal(),
+                e.getState()
         );
     }
 

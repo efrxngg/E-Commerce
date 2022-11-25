@@ -62,7 +62,9 @@ public class InvoiceServiceImpl implements IInvoiceService {
                 invoiceHeader.getDate_creation(),
                 invoiceDetailts.stream().map(mapper::to).collect(Collectors.toSet()),
                 sub_total,
-                total);
+                total,
+                invoiceHeader.getState()
+                );
     }
 
     private BigDecimal calcSubTotal(Set<ItemEntity> cartItems) {
