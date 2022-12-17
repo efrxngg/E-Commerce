@@ -8,3 +8,5 @@ Este proyecto fue desarrollado con las siguientes espeficicaciones
 <b>Spring boot versión:</b> 2.7.5
 <br>
 <b>PostgreSQL versión:</b> 14.5
+### Nota
+El módulo de seguridad está siendo reescrito en otro apartado para futuras implementaciónes
